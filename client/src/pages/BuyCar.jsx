@@ -9,6 +9,7 @@ const BuyCar = () => {
   const [interest, setInterest] = useState(8.5);
   const [emi, setEmi] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(false);
   useEffect(() => {
     setLoading(true);
     let tempInt = interest / 12;
@@ -22,6 +23,14 @@ const BuyCar = () => {
   }, []);
   // P x R x (1+R)^N / [(1+R)^N-1]
   const handleChange = () => {
+    setErr(false);
+    if (price <= 0 || interest <= 0 || emi <= 0) {
+      setErr(true);
+      setTimeout(() => {
+        setErr(false);
+      }, 5000);
+      return;
+    }
     setLoading(true);
     let tempInt = interest / 12;
     tempInt = tempInt / 100;
@@ -115,6 +124,7 @@ const BuyCar = () => {
               <p>Down Payment: {(Number(price) / 5).toFixed(2)}</p>
               <p>EMI will be: {Number(emi).toFixed(2)}&#8377;</p>
               <p>Loan tenure: {4} Years</p>
+              {err && <p className="text-red-600">Provide All Values</p>}
             </div>
           </div>
         )}

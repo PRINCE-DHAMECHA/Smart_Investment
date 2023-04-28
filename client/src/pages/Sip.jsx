@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useAppContext } from "../context/appContext";
 import Button from "../components/Button";
+import { Header } from "../components";
+
 import {
   ChartComponent,
   SeriesCollectionDirective,
@@ -100,11 +102,11 @@ function Sip() {
   };
 
   return (
-    <div>
-      <div className=" text-lg:text-3xl text-2xl font-extrabold pb-2 dark:text-white text-black border-solid border-b-2 m-4 text-center">
-        Systematic Investment Plan
+    <div className="m-2 md:m-10 mb-10 mt-24 mx-2 md:mx-9 p-2 pb-10 md:p-10 dark:bg-secondary-dark-bg bg-white rounded-3xl">
+      <div className=" text-lg:text-3xl text-2xl font-extrabold pb-2 dark:text-white text-black border-solid m-4 text-center">
+        <Header title={"SIP"} />
         <select
-          className="ml-10 outline-none dark:text-black bg-white"
+          className="outline-none dark:text-black bg-white"
           value={selectedComponent}
           onChange={handleChange}
         >
@@ -242,6 +244,7 @@ function Sipcalc(props) {
 }
 
 function Sipreport(props) {
+  const { currentColor } = useAppContext();
   const year = props.yeararr;
   const Amtdp = props.tinvestedarr;
   const returnsEarned = props.tyearlyi;
@@ -251,20 +254,20 @@ function Sipreport(props) {
     return null; // or return an error message
   }
   return (
-    <div className="md:m-10 mb-10 mt-24 md:mx-9 mx-2 p-2 md:p-6 dark:bg-secondary-dark-bg rounded-3xl flex flex-col lg:flex-col lg:items-center">
-      <div className="mb-10 relative flex flex-row">
-        <table className="dark:text-white p-4">
+    <div className="mb-10 mt-24 mx-2 p-2 md:p-6 dark:bg-secondary-dark-bg rounded-3xl flex flex-col">
+      <div className="mb-10 relative flex flex-col justify-center dark:text-white">
+        {/* <table className="dark:text-white p-4">
           <thead>
-            <tr>
+            <tr className="flex gap-5">
               <th>Year</th>
-              <th>Amt Deposited</th>
-              <th>Returns Earned</th>
-              <th>Year end balance</th>
+              <th>Deposit</th>
+              <th>Returns</th>
+              <th>Balance</th>
             </tr>
           </thead>
           <tbody>
             {Amtdp.map((val, index) => (
-              <tr className="p-5" key={index}>
+              <tr className="flex gap-5 justify-center" key={index}>
                 <td>{Number(year[index]).toFixed(2)}</td>
                 <td>{Number(Amtdp[index]).toFixed(2)}</td>
                 <td>{Number(returnsEarned[index]).toFixed(2)}</td>
@@ -272,7 +275,26 @@ function Sipreport(props) {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
+        <div
+          style={{ borderBottom: `2px solid ${currentColor}` }}
+          className="flex md:text-xl flex-row gap-5 justify-center text-center text-base w-full mb-3 rounded-md p-2"
+        >
+          <p className="w-1/4">Year</p>
+          <p className="w-1/4">Deposit</p>
+          <p className="w-1/4">Returns</p>
+          <p className="w-1/4">Balance</p>
+        </div>
+        <div className="flex flex-col">
+          {Amtdp.map((val, index) => (
+            <div className="flex flex-row gap-5 justify-center text-center md:text-lg">
+              <p className="w-1/4">{Number(year[index]).toFixed(2)}</p>
+              <p className="w-1/4">{Number(Amtdp[index]).toFixed(2)}</p>
+              <p className="w-1/4">{Number(returnsEarned[index]).toFixed(2)}</p>
+              <p className="w-1/4">{Number(yearend[index]).toFixed(2)}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -390,15 +412,13 @@ function Sipinfo() {
   return (
     <>
       {data.map((item, i) => (
-        <div className="md:m-5 mb-5 mt-5 md:mx-5 mx-5 p-2 md:p-4 dark:bg-secondary-dark-bg rounded-3xl flex flex-col lg:flex-col lg:items-start">
+        <div className="md:m-5 mb-5 mt-5 md:mx-5 mx-5 p-2 md:p-4 dark:bg-secondary-dark-bg rounded-3xl flex flex-col lg:flex-col lg:items-start  shadow-sm">
           <div className="m-auto relative flex flex-col">
             <div
-              className="flex flex-row dark:text-white justify-between cursor-pointer text-lg "
+              className="flex flex-row dark:text-white justify-between cursor-pointer text-lg"
               onClick={() => toggle(i)}
             >
-              {item.question}
-              <br />
-              <br />
+              <p>{item.question}</p>
               <span className="items-end">
                 <div>{selected === i ? "-" : "+"}</div>
               </span>
