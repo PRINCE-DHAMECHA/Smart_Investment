@@ -1,6 +1,6 @@
 import React from "react";
-import logoDark from "../utils/img/logodark.jpg";
-import logo from "../utils/img/logo.jpg";
+import logoDark from "../utils/img/darkSmart.jpg";
+import logo from "../utils/img/smart.jpg";
 import { useAppContext } from "../context/appContext";
 import { quotes } from "../data/dummy";
 import Button from "../components/Button";

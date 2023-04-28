@@ -1,5 +1,5 @@
-import logoLight from "../utils/img/logo.jpg";
-import logoDark from "../utils/img/logodark.jpg";
+import logoLight from "../utils/img/smart.jpg";
+import logoDark from "../utils/img/darkSmart.jpg";
 import { useAppContext } from "../context/appContext";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -77,11 +77,11 @@ export default function Register() {
         </div>
       ) : (
         <div className="flex justify-center flex-wrap text-center">
-          <Link to="/landing">
+          <Link className="w-full" to="/landing">
             <img
               src={currentMode === "Dark" ? logoDark : logoLight}
               alt="Logo"
-              className="m-auto mt-5 w-2/3 md:w-3/12 h-auto"
+              className="m-auto mt-5 w-2/3 md:w-2/12 h-auto"
             ></img>
           </Link>
           <div className="max-w-sm w-full space-y-8">
